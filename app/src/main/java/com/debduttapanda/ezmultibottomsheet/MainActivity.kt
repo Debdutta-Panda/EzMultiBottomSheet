@@ -6,6 +6,8 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -54,6 +56,17 @@ fun MainScreen() {
         mutableStateOf(true)
     }
 
+    val shape by remember {
+        derivedStateOf {
+            if(switch){
+                CircleShape
+            }
+            else{
+                RoundedCornerShape(24.dp)
+            }
+        }
+    }
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = {
@@ -71,6 +84,7 @@ fun MainScreen() {
             }
         },
         modifier = Modifier.fillMaxSize(),
+        sheetShape = shape
     ) {
         Column(
             modifier = Modifier
@@ -80,7 +94,7 @@ fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Welcome to bottom sheet playground!",
+                text = "Multiple Bottom sheet",
                 modifier = Modifier.fillMaxWidth(),
                 style = MaterialTheme.typography.h4,
                 textAlign = TextAlign.Center
